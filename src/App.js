@@ -21,12 +21,13 @@ function App() {
         return <Loading />;
     }
     // console.log(questions[0]);
-    const { question, incorrect_answers, correct_answer } = questions[index];
+    const { question, incorrect_answers, correct_answer } =
+        questions[index - 1];
     const answers = [...incorrect_answers, correct_answer];
 
     return (
         <main>
-            {/* <Modal/> */}
+            <Modal />
             <section className="quiz">
                 <p className="correct-answers">
                     correct answers : {correct} / {index}

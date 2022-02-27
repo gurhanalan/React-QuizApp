@@ -18,7 +18,7 @@ const AppProvider = ({ children }) => {
     const [waiting, setWaiting] = useState(true);
     const [loading, setLoading] = useState(false);
     const [questions, setQuestions] = useState([]);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(1);
     const [correct, setCorrect] = useState(0);
     const [error, setError] = useState(false);
 
@@ -49,8 +49,8 @@ const AppProvider = ({ children }) => {
         setIndex((oldIndex) => {
             const index = oldIndex + 1;
             if (index > questions.length - 1) {
-                // OpenModal()
-                return 0;
+                openModal();
+                return questions.length;
             } else {
                 return index;
             }
@@ -58,12 +58,22 @@ const AppProvider = ({ children }) => {
     };
 
     const checkAnswer = (value) => {
-        if(value) {
-            setCorrect(old => old + 1)
-
+        if (value) {
+            setCorrect((old) => old + 1);
         }
-        nextQuestion()
-    }
+        nextQuestion();
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setWaiting(true);
+        setCorrect(0);
+        setIndex(0);
+    };
     useEffect(() => {
         fetchQuestions(`${API_ENDPOINT}${tempUrl}`);
     }, []);
@@ -78,7 +88,8 @@ const AppProvider = ({ children }) => {
                 error,
                 isModalOpen,
                 nextQuestion,
-                checkAnswer
+                checkAnswer,
+                closeModal,
             }}
         >
             {children}
