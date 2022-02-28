@@ -38,7 +38,11 @@ function App() {
                         {answers.map((answer, index) => (
                             <button
                                 key={index}
-                                className="answer-btn"
+                                className={`answer-btn ${
+                                    answer === correct_answer
+                                        ? "correct"
+                                        : "wrong"
+                                }`}
                                 onClick={() => {
                                     checkAnswer(answer === correct_answer);
                                 }}
