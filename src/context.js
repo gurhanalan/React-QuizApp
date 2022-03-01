@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 const table = {
     sports: 21,
@@ -85,7 +85,7 @@ const AppProvider = ({ children }) => {
         const url = `${API_ENDPOINT}amount=${quiz.amount}&difficulty=${
             quiz.difficulty
         }&category=${table[quiz.category]}&type=multiple`;
-        console.log(e);
+
         fetchQuestions(url);
     };
 
